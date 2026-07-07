@@ -1,0 +1,48 @@
+/* Habita CRM — Design Tokens · Light = :root · Dark = [data-theme="dark"] */
+:root{
+  --font-sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --color-brand-purple:#3b226d; --color-brand-purple-hover:#311c5b; --color-brand-orchid:#8d2876;
+  --color-brand-coral:#e61c54; --color-brand-coral-hover:#c8164a; --color-brand-ink:#0b1b3d;
+  --color-surface-white:#fff; --color-surface-background:#f6f5f9; --color-surface-sunken:#efedf4; --color-surface-subtle:#f8f7fb;
+  --color-border-default:#d5d0e0; --color-border-stroke:#e7e4ee; --color-border-interactive:#8b82a2; --color-border-strong:#9e96b3;
+  --color-text-primary:#15122b; --color-text-secondary:#46415a; --color-text-muted:#6b6580; --color-text-disabled:#a7a1b5;
+  --color-semantic-success:#067a57; --color-semantic-success-bg:#e2f5ee; --color-semantic-success-text:#055c42; --color-semantic-success-border:#9bd9c4;
+  --color-semantic-warning:#946a00; --color-semantic-warning-bg:#fbf0d6; --color-semantic-warning-text:#6e4f00; --color-semantic-warning-border:#e6cb86;
+  --color-semantic-critical:#c4471a; --color-semantic-critical-bg:#fbe7dd; --color-semantic-critical-text:#8f2e10;
+  --color-semantic-error:#c42026; --color-semantic-error-hover:#a81b20; --color-semantic-error-bg:#fce9e9; --color-semantic-error-text:#9b1c20; --color-semantic-error-border:#eeb4b6;
+  --color-semantic-info:#1366d6; --color-semantic-info-bg:#e8f0fc; --color-semantic-info-text:#0f4fa3; --color-semantic-info-border:#afcbf2;
+  --color-state-ghost-hover:#ebe8f3;
+  --color-support-01-blue:#1366d6; --color-support-02-cyan:#0e7090; --color-support-03-teal:#0e7c6b; --color-support-04-violet:#6035d0;
+  --color-support-05-fuchsia:#b33198; --color-support-06-lime:#478309; --color-support-07-bronze:#87571f; --color-support-08-slate:#475089;
+  --color-inverse-surface:#1d1a2e; --color-inverse-text:#fff;
+  --space-none:0px; --space-3xs:2px; --space-2xs:4px; --space-xs:6px; --space-sm:8px; --space-md:12px; --space-lg:16px; --space-xl:20px; --space-2xl:24px; --space-3xl:32px; --space-4xl:40px; --space-5xl:48px; --space-6xl:64px;
+  --radius-none:0px; --radius-xs:4px; --radius-sm:6px; --radius-md:8px; --radius-lg:10px; --radius-xl:12px; --radius-full:999px;
+  --focus-ring:2px solid var(--color-brand-purple); --focus-offset:2px;
+}
+[data-theme="dark"]{
+  --color-brand-purple:#8166cc; --color-brand-purple-hover:#6e55b0; --color-brand-orchid:#b5519c;
+  --color-brand-coral:#f5436a; --color-brand-coral-hover:#d83b5e; --color-brand-ink:#c9ceda;
+  --color-surface-white:#1c1a29; --color-surface-background:#131120; --color-surface-sunken:#262234; --color-surface-subtle:#211e30;
+  --color-border-default:#3a3650; --color-border-stroke:#2c2940; --color-border-interactive:#6b647f; --color-border-strong:#564f6b;
+  --color-text-primary:#f2f0f7; --color-text-secondary:#c3bed2; --color-text-muted:#948ea6; --color-text-disabled:#5b5572;
+  --color-semantic-success:#1fb389; --color-semantic-success-bg:#103029; --color-semantic-success-text:#74e3c0; --color-semantic-success-border:#1f5848;
+  --color-semantic-warning:#d7a12b; --color-semantic-warning-bg:#33280c; --color-semantic-warning-text:#ecc56b; --color-semantic-warning-border:#5c4a1e;
+  --color-semantic-critical:#e9703f; --color-semantic-critical-bg:#36190e; --color-semantic-critical-text:#f0a284;
+  --color-semantic-error:#ef5350; --color-semantic-error-hover:#d43e3b; --color-semantic-error-bg:#371416; --color-semantic-error-text:#f2999b; --color-semantic-error-border:#6b2e30;
+  --color-semantic-info:#5b9df5; --color-semantic-info-bg:#14243a; --color-semantic-info-text:#9cc1f5; --color-semantic-info-border:#2b456e;
+  --color-state-ghost-hover:#2a2540;
+  --color-support-01-blue:#5b9df5; --color-support-02-cyan:#3fb6d8; --color-support-03-teal:#2fc2a8; --color-support-04-violet:#9b7af0;
+  --color-support-05-fuchsia:#e069c4; --color-support-06-lime:#84c13f; --color-support-07-bronze:#c9954f; --color-support-08-slate:#8b93c9;
+}
+.type-display-large{font:700 48px/56px var(--font-sans);letter-spacing:-.025em}
+.type-display-medium{font:700 40px/48px var(--font-sans);letter-spacing:-.02em}
+.type-display-small{font:700 32px/40px var(--font-sans);letter-spacing:-.015em}
+.type-heading-h1{font:600 28px/36px var(--font-sans);letter-spacing:-.015em}
+.type-heading-h2{font:600 24px/32px var(--font-sans);letter-spacing:-.01em}
+.type-heading-h3{font:600 20px/28px var(--font-sans);letter-spacing:-.005em}
+.type-heading-h4{font:600 16px/24px var(--font-sans)}
+.type-body-medium{font:400 14px/22px var(--font-sans)}
+.type-body-medium-strong{font:600 14px/22px var(--font-sans)}
+.type-body-small{font:400 13px/20px var(--font-sans)}
+.type-ui-caption{font:400 12px/16px var(--font-sans);letter-spacing:.01em}
+.type-ui-overline{font:600 11px/16px var(--font-sans);letter-spacing:.08em;text-transform:uppercase}

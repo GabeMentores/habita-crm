@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Habita CRM — Negócios (demo)</title>
+<link rel="stylesheet" href="../design-system/habita-tokens.css">
+<link rel="stylesheet" href="../design-system/habita-components.css">
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:var(--font-sans);color:var(--color-text-primary);background:var(--color-surface-background)}
+.app{display:flex;min-height:100vh}
+.sidebar{width:248px;flex:none;display:flex;flex-direction:column;gap:var(--space-xs);padding:22px var(--space-lg);background:var(--color-surface-white);border-right:1px solid var(--color-border-stroke);transition:width .16s}
+.sidebar__logo-row{display:flex;align-items:center;justify-content:space-between;padding:0 4px var(--space-lg)}
+.nav{display:flex;flex-direction:column;gap:var(--space-xs)} .nav-spacer{flex:1}
+.nav-item{display:flex;align-items:center;gap:var(--space-md);padding:10px var(--space-md);border-radius:var(--radius-md);font:500 14px/20px var(--font-sans);color:var(--color-text-secondary);text-decoration:none;cursor:pointer}
+.nav-item:hover{background:var(--color-surface-sunken);color:var(--color-text-primary)}
+.nav-item--active,.nav-item--active:hover{background:var(--color-brand-purple);color:#fff;font-weight:600}
+.main{flex:1;display:flex;flex-direction:column;min-width:0}
+.topbar{display:flex;align-items:center;justify-content:space-between;height:68px;padding:0 var(--space-3xl);background:var(--color-surface-white);border-bottom:1px solid var(--color-border-stroke)}
+.topbar__left{display:flex;align-items:center;gap:var(--space-2xl)} .topbar__logo{display:none}
+.topbar__right{display:flex;align-items:center;gap:var(--space-lg)}
+.iconbtn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:none;background:none;border-radius:var(--radius-md);color:var(--color-text-muted);cursor:pointer}
+.iconbtn:hover{background:var(--color-surface-sunken)}
+.content{padding:28px var(--space-3xl) var(--space-3xl);display:flex;flex-direction:column;gap:var(--space-2xl)}
+.page-head{display:flex;align-items:center;justify-content:space-between;gap:var(--space-lg)}
+.page-head h1{margin:0;font:600 26px/32px var(--font-sans);letter-spacing:-.015em}
+.page-head p{margin:4px 0 0;font:400 14px/20px var(--font-sans);color:var(--color-text-muted)}
+.page-head__actions{display:flex;gap:var(--space-md)}
+.kpis{display:flex;gap:var(--space-lg)} .kpis .kpi{flex:1}
+.kpi__trend svg{width:14px;height:14px}
+.section{display:flex;flex-direction:column;gap:var(--space-lg)}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:var(--space-lg)}
+.toolbar__right{display:flex;align-items:center;gap:var(--space-sm)} .toolbar__right .search{width:260px}
+.search{display:flex;align-items:center;gap:var(--space-sm);height:40px;padding:0 var(--space-md);background:var(--color-surface-white);border:1px solid var(--color-border-default);border-radius:var(--radius-md)}
+.search:focus-within{outline:var(--focus-ring);outline-offset:-1px;border-color:var(--color-brand-purple)}
+.search svg{color:var(--color-text-muted)}
+.search input{border:none;outline:none;background:none;font:400 14px/20px var(--font-sans);color:var(--color-text-primary);width:100%}
+.cell-name{display:flex;align-items:center;gap:var(--space-md);font-weight:600}
+.table-foot{display:flex;align-items:center;justify-content:space-between;padding:var(--space-lg);font:400 13px/20px var(--font-sans);color:var(--color-text-muted)}
+.pager{display:flex;gap:var(--space-2xs)}
+.pager button{min-width:32px;height:32px;padding:0 8px;border:1px solid var(--color-border-default);background:var(--color-surface-white);border-radius:var(--radius-md);color:var(--color-text-secondary);font:500 13px/1 var(--font-sans);cursor:pointer}
+.pager button.is-active{background:var(--color-brand-purple);border-color:var(--color-brand-purple);color:#fff}
+.modal-root{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:50} .modal-root[hidden]{display:none}
+.field{display:flex;flex-direction:column;gap:var(--space-xs)}
+.field label{font:500 13px/18px var(--font-sans);color:var(--color-text-secondary)}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);z-index:60;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none}
+.toast.is-show{opacity:1;transform:translateX(-50%) translateY(0)}
+.app[data-collapsed] .sidebar{width:76px}
+.app[data-collapsed] .sidebar__logo-row{justify-content:center}
+.app[data-collapsed] .brand,.app[data-collapsed] .nav-item__label{display:none}
+.app[data-collapsed] .nav-item{justify-content:center;padding:10px}
+.app[data-collapsed] .topbar__logo{display:flex}
+</style>
+</head>
+<body>
+<svg style="display:none"><symbol id="brand-mark" viewBox="0 0 40 40"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E61C54"/><stop offset=".55" stop-color="#8D2876"/><stop offset="1" stop-color="#3B226D"/></linearGradient></defs><g fill="url(#hg)"><rect x="6" y="5" width="8" height="30" rx="2.5"/><rect x="26" y="5" width="8" height="30" rx="2.5"/><rect x="13" y="16" width="14" height="7" rx="2"/></g></symbol></svg>
+<div class="app" id="app">
+  <aside class="sidebar">
+    <div class="sidebar__logo-row">
+      <span class="brand"><svg class="brand__mark"><use href="#brand-mark"/></svg><span class="brand__name">habita</span></span>
+      <button class="sidebar-toggle" id="toggleBtn"><svg class="icon icon--sm"><use href="../design-system/habita-icons.svg#i-chevron-left"/></svg></button>
+    </div>
+    <nav class="nav">
+      <a class="nav-item"><svg class="icon icon--sm"><use href="../design-system/habita-icons.svg#i-home"/></svg><span class="nav-item__label">Dashboard</span></a>
+      <a class="nav-item nav-item--active"><svg class="icon icon--sm"><use href="../design-system/habita-icons.svg#i-briefcase"/></svg><span class="nav-item__label">Negócios</span></a>
+      <a class="nav-item"><svg class="icon icon--sm"><use href="../design-system/habita-icons.svg#i-users"/></svg><span class="nav-item__label">Contatos</span></a>
+      <a class="nav-item"><svg class="icon icon--sm"><use href="../design-system/habita-icons.svg#i-chart"/></svg><span class="nav-item__label">Relatórios</span></a>
+      <span class="nav-spacer"></span>
+      <a class="nav-item"><svg class="icon icon--sm"><use href="../design-system/habita-icons.svg#i-settings"/></svg><span class="nav-item__label">Configurações</span></a>
+    </nav>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar__left">
+        <span class="brand topbar__logo"><svg class="brand__mark"><use href="#brand-mark"/></svg><span class="brand__name">habita</span></span>
+        <label class="search" style="width:380px"><svg class="icon icon--sm"><use href="../design-system/habita-icons.svg#i-search"/></svg><input placeholder="Buscar leads, contatos…"></label>
+      </div>
+      <div class="topbar__right">
+        <button class="iconbtn" id="themeBtn"><svg class="icon icon--sm"><use href="../design-system/habita-icons.svg#i-moon" id="themeUse"/></svg></button>
+        <button class="iconbtn"><svg class="icon icon--sm"><use href="../design-system/habita-icons.svg#i-bell"/></svg></button>
+        <span class="avatar">GS</span>
+      </div>
+    </header>
+    <div class="content">
+      <div class="page-head">
+        <div><h1>Negócios</h1><p>Acompanhe seu funil e os negócios em andamento.</p></div>
+        <div class="page-head__actions">
+          <button class="btn btn--secondary">Importar</button>
+          <button class="btn btn--primary" id="newDeal"><svg class="icon icon--sm"><use href="../design-system/habita-icons.svg#i-plus"/></svg> Novo negócio</button>
+        </div>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><span class="kpi__label">Receita do mês</span><span class="kpi__value">R$ 1,24M</span><span class="kpi__trend kpi__trend--up">12% vs. mês ant.</span></div>
+        <div class="kpi"><span class="kpi__label">Negócios ganhos</span><span class="kpi__value">48</span><span class="kpi__trend kpi__trend--up">+5 na semana</span></div>
+        <div class="kpi"><span class="kpi__label">Taxa de conversão</span><span class="kpi__value">24%</span><span class="kpi__trend kpi__trend--down">2 p.p. na semana</span></div>
+        <div class="kpi"><span class="kpi__label">Ticket médio</span><span class="kpi__value">R$ 86,2k</span><span class="kpi__trend kpi__trend--up">+3,1%</span></div>
+      </div>
+      <div class="section">
+        <div class="toolbar">
+          <div class="tabs" id="tabs">
+            <button class="tab tab--active" data-tab="todos">Todos</button>
+            <button class="tab" data-tab="aberto">Em aberto</button>
+            <button class="tab" data-tab="ganhos">Ganhos</button>
+            <button class="tab" data-tab="perdidos">Perdidos</button>
+          </div>
+          <div class="toolbar__right">
+            <label class="search"><svg class="icon icon--sm"><use href="../design-system/habita-icons.svg#i-search"/></svg><input id="tableSearch" placeholder="Buscar negócio…"></label>
+            <button class="btn btn--ghost" id="filtros"><svg class="icon icon--sm"><use href="../design-system/habita-icons.svg#i-filter"/></svg> Filtros</button>
+          </div>
+        </div>
+        <table class="table">
+          <thead><tr><th style="width:40px"></th><th>Responsável</th><th>Empresa</th><th>Etapa</th><th class="num">Valor</th><th style="width:48px"></th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+        <div class="table-foot"><span id="count"></span>
+          <div class="pager" id="pager"><button>‹</button><button class="is-active">1</button><button>2</button><button>3</button><button>›</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-root" id="modal" hidden>
+  <div class="modal__scrim" data-close></div>
+  <div class="modal">
+    <div class="modal__body">
+      <h2 class="modal__title">Novo negócio</h2>
+      <div class="field"><label>Responsável</label><input class="input" id="mName" placeholder="Nome do responsável"></div>
+      <div class="field"><label>Empresa</label><input class="input" id="mCompany" placeholder="Nome da empresa"></div>
+      <div class="field"><label>Valor (R$)</label><input class="input" id="mValue" placeholder="0,00"></div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn btn--secondary" data-close>Cancelar</button>
+      <button class="btn btn--primary" id="mCreate">Criar negócio</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"><span id="toastMsg"></span></div>
+<script>
+const app=document.getElementById('app'),tbody=document.getElementById('tbody'),countEl=document.getElementById('count');
+const SUPPORT=['01-blue','02-cyan','03-teal','04-violet','05-fuchsia','06-lime','07-bronze','08-slate'];
+const STAGE={Ganho:'success',Pendente:'warning',Atrasado:'error',Rascunho:null,Perdido:'neutral'};
+let deals=[{name:'Mariana Lopes',company:'Construtora Aurora',stage:'Ganho',value:128450},{name:'João Pereira',company:'Imobiliária Sul',stage:'Pendente',value:96300},{name:'Ana Castro',company:'Grupo Meridiano',stage:'Atrasado',value:212900},{name:'Rafael Teixeira',company:'Incorporadora Vale',stage:'Rascunho',value:54800},{name:'Carla Nunes',company:'Lar Ideal',stage:'Perdido',value:41200},{name:'Bruno Dias',company:'Cidade Nova',stage:'Ganho',value:173000},{name:'Letícia Maia',company:'Horizonte Imóveis',stage:'Pendente',value:88700}];
+const TABMAP={todos:null,aberto:['Pendente','Atrasado','Rascunho'],ganhos:['Ganho'],perdidos:['Perdido']};
+const ini=n=>n.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+const brl=v=>'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2});
+function row(d,i){const c=`var(--color-support-${SUPPORT[i%SUPPORT.length]})`,s=STAGE[d.stage];
+  const st=s?`<span class="badge badge--${s}">${d.stage}</span>`:`<span style="color:var(--color-text-muted)">${d.stage}</span>`;
+  return `<tr data-stage="${d.stage}" data-text="${(d.name+' '+d.company).toLowerCase()}"><td><input type="checkbox" class="checkbox"></td><td><span class="cell-name"><span class="avatar" style="background:${c}">${ini(d.name)}</span>${d.name}</span></td><td style="color:var(--color-text-secondary)">${d.company}</td><td>${st}</td><td class="num">${brl(d.value)}</td><td><button class="iconbtn"><svg class="icon icon--sm"><use href="../design-system/habita-icons.svg#i-kebab"/></svg></button></td></tr>`;}
+function render(){tbody.innerHTML=deals.map(row).join('');filter();}
+function filter(){const tab=document.querySelector('.tab--active').dataset.tab,allow=TABMAP[tab];const q=document.getElementById('tableSearch').value.trim().toLowerCase();let n=0;
+  [...tbody.querySelectorAll('tr')].forEach(tr=>{if(tr.dataset.empty){tr.remove();return;}const ok=(!allow||allow.includes(tr.dataset.stage))&&(!q||tr.dataset.text.includes(q));tr.style.display=ok?'':'none';if(ok)n++;});
+  if(n===0){const tr=document.createElement('tr');tr.dataset.empty='1';tr.innerHTML='<td colspan="6" style="text-align:center;color:var(--color-text-muted);padding:40px">Nenhum negócio nesta visão.</td>';tbody.appendChild(tr);}
+  countEl.textContent=`${n} de ${deals.length} negócios`;}
+document.getElementById('tabs').onclick=e=>{const t=e.target.closest('.tab');if(!t)return;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('tab--active'));t.classList.add('tab--active');filter();};
+document.getElementById('tableSearch').oninput=filter;
+document.getElementById('toggleBtn').onclick=()=>app.toggleAttribute('data-collapsed');
+document.getElementById('themeBtn').onclick=()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme==='dark'?'light':'dark';document.getElementById('themeUse').setAttribute('href','../design-system/habita-icons.svg#i-'+(r.dataset.theme==='dark'?'chevron-up':'moon'));};
+document.getElementById('pager').onclick=e=>{const b=e.target.closest('button');if(!b||isNaN(parseInt(b.textContent)))return;document.querySelectorAll('#pager button').forEach(x=>x.classList.remove('is-active'));b.classList.add('is-active');};
+let tt;function toast(m){const el=document.getElementById('toast');document.getElementById('toastMsg').textContent=m;el.classList.add('is-show');clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('is-show'),2200);}
+document.getElementById('filtros').onclick=()=>toast('Painel de filtros — em breve');
+const modal=document.getElementById('modal');
+document.getElementById('newDeal').onclick=()=>{modal.hidden=false;document.getElementById('mName').focus();};
+modal.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>{modal.hidden=true;['mName','mCompany','mValue'].forEach(id=>document.getElementById(id).value='');});
+document.getElementById('mCreate').onclick=()=>{const name=document.getElementById('mName').value.trim()||'Novo responsável',company=document.getElementById('mCompany').value.trim()||'Empresa',value=parseFloat(document.getElementById('mValue').value.replace(/\./g,'').replace(',','.'))||0;deals.unshift({name,company,stage:'Rascunho',value});modal.hidden=true;render();toast('Negócio criado');};
+render();
+</script>
+</body>
+</html>

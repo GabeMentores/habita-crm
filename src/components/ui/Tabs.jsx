@@ -1,0 +1,15 @@
+export default function Tabs({ tabs, active, onChange }) {
+  return (
+    <div className="tabs" role="tablist">
+      {tabs.map((t) => (
+        <button
+          key={t.id} role="tab" aria-selected={active === t.id}
+          className={`tab ${active === t.id ? "tab--active" : ""}`.trim()}
+          onClick={() => onChange(t.id)}
+        >
+          {t.label}
+        </button>
+      ))}
+    </div>
+  );
+}
