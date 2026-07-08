@@ -15,6 +15,12 @@ const PATHS = {
   down: <path d="M12 5v14M6 13l6 6 6-6" />,
   moon: <path d="M20 14a8 8 0 11-9-11 6.5 6.5 0 009 11z" />,
   sun: <><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19" /></>,
+  close: <path d="M6 6l12 12M18 6L6 18" />,
+  checkCircle: <><circle cx="12" cy="12" r="9" /><path d="M8 12l3 3 5-6" /></>,
+  info: <><circle cx="12" cy="12" r="9" /><path d="M12 11v5" /><circle cx="12" cy="7.5" r="1.1" fill="currentColor" stroke="none" /></>,
+  warning: <><path d="M12 3l9 16H3z" /><path d="M12 9v5" /><circle cx="12" cy="17" r="1.1" fill="currentColor" stroke="none" /></>,
+  chevronDown: <path d="M6 9l6 6 6-6" />,
+  chevronUp: <path d="M6 15l6-6 6 6" />,
 };
 
 export default function Icon({ name, size = 24, className = "" }) {

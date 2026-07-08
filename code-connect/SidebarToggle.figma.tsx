@@ -1,8 +1,7 @@
 import figma from "@figma/code-connect";
+import SidebarToggle from "../src/components/ui/SidebarToggle";
 
-figma.connect("https://www.figma.com/design/uHbOgcjvm7Jwc54ckNhSfl/CRM---Habita?node-id=70-484", {
-  props: { direction: figma.enum("Direction", { Collapse: "chevronLeft", Expand: "menu" }) },
-  example: ({ direction }) => (
-    <button className="sidebar-toggle" data-icon={direction} />
-  ),
+figma.connect(SidebarToggle, "https://www.figma.com/design/uHbOgcjvm7Jwc54ckNhSfl/CRM---Habita?node-id=70-484", {
+  props: { collapsed: figma.enum("Direction", { Collapse: false, Expand: true }) },
+  example: ({ collapsed }) => <SidebarToggle collapsed={collapsed} onClick={() => {}} />,
 });

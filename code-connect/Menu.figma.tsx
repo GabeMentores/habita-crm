@@ -1,12 +1,13 @@
 import figma from "@figma/code-connect";
+import Menu, { MenuItem, MenuSeparator } from "../src/components/ui/Menu";
 
-figma.connect("https://www.figma.com/design/uHbOgcjvm7Jwc54ckNhSfl/CRM---Habita?node-id=25-19", {
+figma.connect(Menu, "https://www.figma.com/design/uHbOgcjvm7Jwc54ckNhSfl/CRM---Habita?node-id=25-19", {
   example: () => (
-    <div className="menu">
-      <div className="menu__item">Editar</div>
-      <div className="menu__item">Duplicar</div>
-      <div className="menu__sep" />
-      <div className="menu__item menu__item--danger">Excluir</div>
-    </div>
+    <Menu>
+      <MenuItem>Editar</MenuItem>
+      <MenuItem>Duplicar</MenuItem>
+      <MenuSeparator />
+      <MenuItem danger>Excluir</MenuItem>
+    </Menu>
   ),
 });

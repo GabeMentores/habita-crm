@@ -15,5 +15,5 @@ Button, Badge, Avatar, TextField, KpiCard, Toast, Dialog, BrandMark, Table,
 Switch, Checkbox, Radio, Tag, Select, Alert, Tab, TableRow, SidebarToggle,
 NavItem, Menu, Tooltip, EmptyState, SideDrawer, Accordion.
 
-Componentes com contraparte React importam o componente; os demais usam
-snippet com as classes CSS do design system.
+Componentes com contraparte React importam o componente; os demais (Table,
+Tab) usam snippet com as classes CSS do design system.

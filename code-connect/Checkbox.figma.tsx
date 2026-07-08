@@ -1,11 +1,13 @@
 import figma from "@figma/code-connect";
+import Checkbox from "../src/components/ui/Checkbox";
 
-figma.connect("https://www.figma.com/design/uHbOgcjvm7Jwc54ckNhSfl/CRM---Habita?node-id=22-62", {
+figma.connect(Checkbox, "https://www.figma.com/design/uHbOgcjvm7Jwc54ckNhSfl/CRM---Habita?node-id=22-62", {
   props: {
     checked: figma.enum("State", { Checked: true, Unchecked: false, Indeterminate: false, Disabled: false }),
-    disabled: figma.enum("State", { Disabled: true }),
+    indeterminate: figma.enum("State", { Indeterminate: true, Checked: false, Unchecked: false, Disabled: false }),
+    disabled: figma.enum("State", { Disabled: true, Checked: false, Unchecked: false, Indeterminate: false }),
   },
-  example: ({ checked, disabled }) => (
-    <input type="checkbox" className="checkbox" defaultChecked={checked} disabled={disabled} />
+  example: ({ checked, indeterminate, disabled }) => (
+    <Checkbox checked={checked} indeterminate={indeterminate} disabled={disabled} onChange={() => {}} />
   ),
 });

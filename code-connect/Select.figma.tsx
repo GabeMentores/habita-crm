@@ -1,8 +1,7 @@
 import figma from "@figma/code-connect";
+import Select from "../src/components/ui/Select";
 
-figma.connect("https://www.figma.com/design/uHbOgcjvm7Jwc54ckNhSfl/CRM---Habita?node-id=23-38", {
+figma.connect(Select, "https://www.figma.com/design/uHbOgcjvm7Jwc54ckNhSfl/CRM---Habita?node-id=23-38", {
   props: { disabled: figma.enum("State", { Disabled: true, Default: false, Focus: false }) },
-  example: ({ disabled }) => (
-    <select className="select" disabled={disabled}><option>Selecione…</option></select>
-  ),
+  example: ({ disabled }) => <Select disabled={disabled} options={["Opção 1", "Opção 2"]} />,
 });
